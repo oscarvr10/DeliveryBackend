@@ -15,7 +15,8 @@ User.create = (user) =>{
 
     user.password = passHashed;
 
-    const sql = `INSERT INTO 
+    const sql = `
+    INSERT INTO 
     users
     (
         email,
@@ -44,4 +45,47 @@ User.create = (user) =>{
         new Date()
     ]);
 }
+
+User.findById = (id, callback) =>{
+    const sql = `
+    SELECT
+        id,
+        email,
+        name,
+        lastname,
+        image,
+        phone,
+        password,        
+        session_token
+    FROM users
+    WHERE id = $1`;
+
+    return db.oneOrNone(sql, id).then(user => { callback(null, user)});
+}
+
+User.findByEmail = (email) =>{
+    const sql = `
+    SELECT
+        id,
+        email,
+        name,
+        lastname,
+        image,
+        phone,
+        password,        
+        salt,
+        session_token
+    FROM users
+    WHERE email = $1`;
+
+    return db.oneOrNone(sql, email);
+}
+
+User.isPasswordMatched = (password, passwordHashed, salt) =>{
+    var hash = crypto.pbkdf2Sync(password,  
+        salt, 1000, 64, `sha512`).toString(`hex`);         
+
+    return hash === passwordHashed; 
+}
+
 module.exports = User;
