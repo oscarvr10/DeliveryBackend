@@ -6,6 +6,10 @@ const server = http.createServer(app);
 const logger = require('morgan');
 const cors = require('cors');
 
+/*
+** RUTAS
+*/
+const users = require('./routes/userRoutes');
 
 const port = process.env.PORT || 3000;
 
@@ -20,20 +24,24 @@ app.disable('x-powered-by');
 
 app.set('port', port);
 
+/*
+* Llamando rutas
+*/
+users(app);
+
 server.listen(3000, '192.168.100.59' || 'localhost', function(){
     console.log('Aplicsción de Node JS ' + port + ' iniciada....')
 });
 
-app.get('/', (req, res) =>{
-    res.send('Raiz backend');
-});
-
-app.get('/test', (req, res) =>{
-    res.send('Ruta test');
-});
 
 //Error Handler
 app.use((err, req, res, next) => {
     console.log(err);
     res.status(err.status || 500).send(err.stack);
 });
+
+//Exponer variables a otros archivos
+module.exports = {
+    app: app,
+    server : server
+};
