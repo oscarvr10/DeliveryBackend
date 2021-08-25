@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Role = require('../models/role');
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
 
@@ -28,10 +29,12 @@ module.exports = {
         try {
             const user = req.body;
             const data = await User.create(user);
+            
+            await Role.create(data.id, 1); // Role by default -> client
 
             return res.status(201).json({
                 success: true,
-                message: 'El usuario se ha registrado correctamente.',
+                message: 'El registro se ha realizado correctamente. Por favor, ahora inicia sesión.',
                 data: data.id
             });
         } catch (error) {
@@ -77,12 +80,15 @@ module.exports = {
                     email: userResult.email, 
                     phone: userResult.phone, 
                     image: userResult.image, 
-                    session_token: `JWT ${token}` 
+                    session_token: `JWT ${token}`,
+                    roles: userResult.roles
                 }
+
+                console.log(`USUARIO: ${data}`);
 
                 return res.status(200).json({
                     success: true,
-                    message: null,
+                    message: `¡Bienvenido ${userResult.name} ${userResult.lastname}!`,
                     data: data
                 });
             } else{
