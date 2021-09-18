@@ -29,7 +29,7 @@ app.set('port', port);
 */
 users(app);
 
-server.listen(3000, '192.168.100.59' || 'localhost', function(){
+server.listen(3000, '192.168.100.17' || 'localhost', function(){
     console.log('Node JS application in ' + port + ' port initialized....')
 });
 

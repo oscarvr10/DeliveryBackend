@@ -10,12 +10,14 @@ CREATE TABLE roles(
 
 INSERT INTO roles(
 	name,
+	image,
 	route,
 	created_at,
 	updated_at
 )
 VALUES(
 	'CLIENTE',
+	'https://cdn-icons-png.flaticon.com/512/1077/1077012.png',
 	'client/products/list',
 	'2021-08-25',
 	'2021-08-25'
@@ -23,12 +25,14 @@ VALUES(
 
 INSERT INTO roles(
 	name,
+	image,
 	route,
 	created_at,
 	updated_at
 )
 VALUES(
 	'RESTAURANTE',
+	'https://cdn-icons-png.flaticon.com/512/2533/2533563.png',
 	'restaurant/orders/list',
 	'2021-08-25',
 	'2021-08-25'
@@ -36,12 +40,14 @@ VALUES(
 
 INSERT INTO roles(
 	name,
+	image,
 	route,
 	created_at,
 	updated_at
 )
 VALUES(
 	'REPARTIDOR',
+	'https://cdn-icons-png.flaticon.com/512/2830/2830312.png',
 	'delivery/orders/list',
 	'2021-08-25',
 	'2021-08-25'

@@ -15,7 +15,7 @@ const databaseConfig = {
     'port': 5432,
     'database': 'delivery_db',
     'user': 'postgres',
-    'password': 'Qwerty123'
+    'password': '123456'
 }
 
 const db = pgp(databaseConfig);
